@@ -91,7 +91,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.envymovies" name="ENVY[COLOR FfE36212]MOVIES[/COLOR]" version="1.0.8" provider-name="Johnie">
+<addon id="plugin.video.envymovies" name="ENVY[COLOR FfE36212]MOVIES[/COLOR]" version="1.0.9" provider-name="Johnie">
  <requires>
      <import addon="xbmc.python" version="2.1.0"/>
      <import addon="script.module.urlresolver" version="2.10.0"/>
@@ -260,7 +260,7 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.filmi2k" name="Filmi2k.com" version="1.0.1" provider-name="Johnie">
+<addon id="plugin.video.filmi2k" name="Filmi2k.com" version="1.0.2" provider-name="Johnie">
  <requires>
      <import addon="xbmc.python" version="2.1.0"/>
      <import addon="script.module.urlresolver" version="2.10.0"/>
@@ -1014,7 +1014,7 @@ Turns your XBMC into an instant free on-demand media-center. Stream and download
   </extension>
 </addon>
 
-<addon id="plugin.video.vikir" name="VIKI®" version="0.4.2" provider-name="Majide">
+<addon id="plugin.video.vikir" name="VIKI®" version="0.4.3" provider-name="Majide">
   <requires>
   	<import addon="xbmc.python" version="2.1.0"/>
   	<import addon="script.module.urlresolver"/>
@@ -1032,9 +1032,10 @@ Turns your XBMC into an instant free on-demand media-center. Stream and download
 use it instead of this addon. All rights on content are reserved by Rakuten.</disclaimer>
   	<language>en</language>
   	<platform>all</platform>
+    <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
   	<forum>https://kodibg.org/forum/thread-209.html</forum>
   	<website>https://www.viki.com</website>
-  	<news>Fixed: Video profiles again; Update: HD quality profiles are no longer available; Debug mode is no longer supported for video playing! Please switch it OFF!</news>
+  	<news>Fixed: Bugs, reported by "ginamarat" and "listem"</news>
 	<assets>
 	   <icon>resources/icon.png</icon>
        <fanart>resources/fanart.jpg</fanart>

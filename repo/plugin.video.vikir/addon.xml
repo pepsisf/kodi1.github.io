@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
-<addon id="plugin.video.vikir" name="VIKI®" version="0.4.2" provider-name="Majide">
+<addon id="plugin.video.vikir" name="VIKI®" version="0.4.3" provider-name="Majide">
   <requires>
   	<import addon="xbmc.python" version="2.1.0"/>
   	<import addon="script.module.urlresolver"/>
@@ -17,9 +17,10 @@
 use it instead of this addon. All rights on content are reserved by Rakuten.</disclaimer>
   	<language>en</language>
   	<platform>all</platform>
+    <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
   	<forum>https://kodibg.org/forum/thread-209.html</forum>
   	<website>https://www.viki.com</website>
-  	<news>Fixed: Video profiles again; Update: HD quality profiles are no longer available; Debug mode is no longer supported for video playing! Please switch it OFF!</news>
+  	<news>Fixed: Bugs, reported by "ginamarat" and "listem"</news>
 	<assets>
 	   <icon>resources/icon.png</icon>
        <fanart>resources/fanart.jpg</fanart>
