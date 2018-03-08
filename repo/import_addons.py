@@ -89,6 +89,7 @@ addons_url_list = [
     "https://github.com/ByJohnie/plugin.video.detskifilmi/archive/master.zip",
     "https://github.com/ByJohnie/plugin.video.tvbulsatcomv2/archive/master.zip",
     "https://github.com/ByJohnie/plugin.video.flixtor/archive/master.zip",
+    "https://github.com/ByJohnie/plugin.video.elementaltv/archive/master.zip",
     "https://github.com/zinobg/plugin.video.seirsanduk.r1/archive/master.zip",
     "https://github.com/zinobg/plugin.video.bgtvon/archive/master.zip"
   ]
