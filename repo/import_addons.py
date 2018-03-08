@@ -1,19 +1,21 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import os, sys
+import os
+import re
+import sys
 import md5
+import glob
+import json
+import time
+import shutil
 import urllib
 import urllib2
+import zipfile
+import tempfile
 import requests
 import addons_xml_generator as gen
-import shutil
-import tempfile
-import glob
-import zipfile
-import re
 from lxml import etree
-import time
 
 file_skip = [
               re.compile(r'\.git*'),
@@ -31,68 +33,8 @@ file_skip = [
 tmp_path = tempfile.mkdtemp(prefix='%s_tmp_' % os.path.splitext(os.path.basename(sys.modules['__main__'].__file__))[0])
 cwd = os.getcwd()
 files = ['changelog.txt', 'icon.*', 'addon.xml', 'fanart.*']
-
-addons_url_list = [
-    #"https://www.dropbox.com/s/0tfcw0ivbgzj2mo/plugin.video.bscfvideoteka.zip?dl=1",
-    "https://github.com/kodi1/plugin.program.braviacontrol/archive/master.zip",
-    "https://github.com/kodi1/plugin.video.zelka/archive/master.zip",
-    "https://github.com/kodi1/plugin.video.zamunda/archive/master.zip",
-    "https://github.com/kodi1/service.subtitles.unacs/archive/master.zip",
-    "https://github.com/kodi1/service.backlight.led/archive/master.zip",
-    "https://github.com/kodi1/plugin.program.bscfusion/archive/master.zip",
-    "https://github.com/kodi1/script.module.garepobg/archive/master.zip",
-    "https://github.com/kodi1/plugin.video.kolibka/archive/next.zip",
-    "https://github.com/kodi1/service.screensaver.hooks/archive/master.zip",
-    "https://github.com/kodi1/service.sleeptimer/archive/master.zip",
-    "https://github.com/kodi1/plugin.video.1channel/archive/master.zip",
-    "https://github.com/enen92/service.pvrtools/archive/master.zip",
-    "https://github.com/sasbass/plugin.video.mytv_bg/archive/master.zip",
-    "https://github.com/mrolix/plugin.video.neterratv/archive/master.zip",
-    "https://github.com/harrygg/plugin.video.free.bgtvs/archive/master.zip",
-    "https://github.com/harrygg/plugin.video.gospodari/archive/master.zip",
-    "https://github.com/harrygg/plugin.video.bgcameras/archive/master.zip",
-    "https://github.com/harrygg/plugin.video.gong.play/raw/master/plugin.video.gong.play.zip",
-    "https://github.com/harrygg/plugin.video.slavishow/raw/master/plugin.video.slavishow.zip",
-    "https://github.com/harrygg/plugin.video.btvplus/archive/master.zip",
-    "https://github.com/harrygg/plugin.video.vivatvgo/archive/master.zip",
-    "https://github.com/harrygg/plugin.program.freebgtvs/archive/master.zip",
-    "https://github.com/harrygg/plugin.program.tvbgpvr.backend/archive/master.zip",
-    "https://github.com/harrygg/plugin.video.voyobg/archive/master.zip",
-    "https://github.com/harrygg/script.module.kodibgcommon/archive/master.zip",
-    "https://andromeda.eu.org/kodipermalink/plugin.video.brigada.zip",
-    "https://andromeda.eu.org/kodipermalink/plugin.video.nova.play.zip",
-    "https://andromeda.eu.org/kodipermalink/plugin.video.vbox7.zip",
-    #"https://andromeda.eu.org/kodipermalink/plugin.video.anibg.zip",
-    "https://andromeda.eu.org/kodipermalink/plugin.video.dramafever.zip",
-    "https://andromeda.eu.org/kodipermalink/plugin.video.vikir.zip",
-    "https://andromeda.eu.org/kodipermalink/plugin.video.tubi.zip",
-    "https://andromeda.eu.org/kodipermalink/service.subtitles.bukvibg.zip",
-    "https://andromeda.eu.org/kodipermalink/plugin.video.hbogobg.zip",
-    "https://andromeda.eu.org/kodipermalink/plugin.video.sedem.zip",
-    "https://andromeda.eu.org/kodipermalink/plugin.video.filmboxlivebg.zip",
-    "https://andromeda.eu.org/kodipermalink/script.video.F4mProxy.zip",
-    "https://andromeda.eu.org/kodipermalink/plugin.video.vatim.zip",
-    "https://github.com/tvaddonsco/script.module.urlresolver/archive/master.zip",
-    #"https://github.com/Eldorados/script.module.axel.downloader/archive/master.zip",
-    #"https://github.com/Eldorados/eldorado-xbmc-addons/raw/master/repo/plugin.video.icefilms/plugin.video.icefilms-1.23.0.zip",
-    "https://github.com/DJZONEHOUSERADIO/djzone.house.radio/archive/master.zip",
-    "https://github.com/ByJohnie/plugin.video.misiamoiatdom/archive/master.zip",
-    "https://github.com/ByJohnie/plugin.video.envymovies/archive/master.zip",
-    "https://github.com/ByJohnie/plugin.video.filmi2k/archive/master.zip",
-    "https://github.com/ByJohnie/plugin.video.gomovies/archive/master.zip",
-    "https://github.com/ByJohnie/plugin.video.gledaionlain/archive/master.zip",
-    "https://github.com/ByJohnie/plugin.video.arenabg/archive/master.zip",
-    "https://github.com/ByJohnie/plugin.audio.bgradio_online/archive/master.zip",
-    "https://github.com/ByJohnie/plugin.video.kidamom/archive/master.zip",
-    "https://github.com/ByJohnie/plugin.video.myonvideo/archive/master.zip",
-    "https://github.com/ByJohnie/plugin.video.podprikritie/archive/master.zip",
-    "https://github.com/ByJohnie/plugin.video.detskifilmi/archive/master.zip",
-    "https://github.com/ByJohnie/plugin.video.tvbulsatcomv2/archive/master.zip",
-    "https://github.com/ByJohnie/plugin.video.flixtor/archive/master.zip",
-    "https://github.com/ByJohnie/plugin.video.elementaltv/archive/master.zip",
-    "https://github.com/zinobg/plugin.video.seirsanduk.r1/archive/master.zip",
-    "https://github.com/zinobg/plugin.video.bgtvon/archive/master.zip"
-  ]
+addons_url_list = json.load(open('addons.json'))
+print "Loaded list of %s addon urls" % len(addons_url_list)
 
 def mk_repo_trget_name(name):
   return re.sub( r"(-\w+\.zip|-[\d.]*\.zip|\.zip)", "", os.path.basename(os.path.basename(name)))
