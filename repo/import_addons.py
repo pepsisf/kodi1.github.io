@@ -31,6 +31,7 @@ file_skip = [
               ]
 
 tmp_path = tempfile.mkdtemp(prefix='%s_tmp_' % os.path.splitext(os.path.basename(sys.modules['__main__'].__file__))[0])
+print "Using temp path %s" % tmp_path
 cwd = os.getcwd()
 files = ['changelog.txt', 'icon.*', 'addon.xml', 'fanart.*']
 addons_url_list = json.load(open('addons.json'))
