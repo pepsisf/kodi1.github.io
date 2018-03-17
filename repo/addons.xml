@@ -91,33 +91,6 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.telenet"
-       name="[COLOR orange]ТЕЛЕНЕТ[/COLOR]"
-       version="1.0.0"
-       provider-name="Johnie">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
-  </requires>
-  <extension point="xbmc.python.pluginsource"
-             provides="video"
-             library="default.py">
-    <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary>http://telenet.bg/</summary>
-	<description lang="en">[B][COLOR red]Before use, set your account in the addon settings![/B][/COLOR] TELENET is a VOD service of the famous Bulgarian telecom operator. The service is subscribtion based and requires a paid monthly fee.</description>
-  	<description lang="bg">[B][COLOR red]Преди употреба, въведете акаунта си в настройките![/B][/COLOR] ТЕЛЕНЕТ е VOD услуга на известния български телеком оператор. Услугата е абонаментна и изисква платена месечна такса или безплатна до 12 канала</description>
-    <disclaimer lang="en">This is not an official addon! If the official APP is available for your platform, use it instead of this addon. All rights on content are reserved by Telenet.</disclaimer>
-  	<disclaimer lang="bg">Това не е официална приставка! Ако официално приложение е достъпно за вашата платформа, използвайте него вместо тази приставка. Всички права върху съдържанието са запазени от Теленет.</disclaimer>
-  	<language>bg</language>
-    <platform>all</platform>
-	<assets>
-	   <icon>resources/icon.png</icon>
-       <fanart>resources/fanart.jpg</fanart>
-	</assets>
-  </extension>
-</addon>
-
 <addon id="plugin.video.envymovies" name="ENVY[COLOR FfE36212]MOVIES[/COLOR]" version="1.1.0" provider-name="Johnie">
  <requires>
      <import addon="xbmc.python" version="2.1.0"/>
@@ -425,38 +398,6 @@
 	   <icon>resources/icon.png</icon>
        <fanart>resources/fanart.jpg</fanart>
 	</assets>
-  </extension>
-</addon>
-
-<addon id="plugin.video.anibg" name="ANIBG" version="0.0.4" provider-name="Majide">
-  <requires>
-  	<import addon="xbmc.python" version="2.1.0"/>
-  	<import addon="script.module.urlresolver"/>
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="addon.py">
-  	<provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-  	<summary lang="bg">Приставка за гледане на анимета от anibg.info</summary>
-  	<summary lang="en">Addon for watching animes from anibg.info</summary>
-	<description lang="bg">Приставка за гледане на анимета от anibg.info. Какъвто си е редът, повечето са с оригиналния дублаж на японски и български субтитри. Има и изключения като такива с български дублаж или изобщо без локализация на български (със субтитри или дублаж на английски). Според вашите предпочитания, можете да избирате между отделните налични категории.</description>
-  	<description lang="en">Addon for watching animes from anibg.info. As it the default order is, most are with original Japanese dubbing and Bulgarian subtitles. There are exceptions such as with Bulgarian dubbing or no Bulgarian localization at all (subtitled or dubbed in English only). According to your preference, you can choose between the available categories.</description>
-  	<disclaimer lang="bg">Приставката е разработена с писмено разрешение от администрацията на сайта и се разпространява под GPL2 лиценз.</disclaimer>
-  	<disclaimer lang="en">The addon is developed with permission from administration (site owner) and is distributed under GPL2 license.</disclaimer>
-  	<language>bg</language>
-  	<platform>all</platform>
-  	<forum>https://kodibg.org/forum/thread-62.html</forum>
-  	<website>http://anibg.info</website>
-  	<news></news>
-	<assets>
-	   <icon>resources/icon.png</icon>
-       <fanart>resources/fanart.jpg</fanart>
-       <screenshot>resources/screenshot-01.jpg</screenshot>
-       <screenshot>resources/screenshot-02.jpg</screenshot>
-       <screenshot>resources/fanart.jpg</screenshot>
-	</assets>
-    <broken lang="bg">Сайтът anibg.info е закрит и добавката не функционира. Можете да я деинсталирате.</broken>
-    <broken lang="en">anibg.info website is closed and the addon isn't working. You can uninstall it.</broken>
   </extension>
 </addon>
 
@@ -989,52 +930,6 @@ use it instead of this addon. All rights on content are reserved by Kidamom.</di
 	   <icon>resources/icon.png</icon>
        <fanart>resources/fanart.jpg</fanart>
 	</assets>
-  </extension>
-</addon>
-
-<addon id="plugin.video.icefilms"
-       name="Icefilms"
-       version="1.23.0"
-       provider-name="Eldorado (originator: anarchintosh)">
-    <requires>
-        <import addon="xbmc.python" version="2.1.0"/>
-        <import addon="script.module.simplejson" version="3.3.0"/>
-        <import addon="script.module.elementtree" />
-        <import addon="script.module.beautifulsoup" />
-        <import addon="script.module.metahandler" version="2.5.1" />
-        <import addon="script.module.addon.common" version="2.0.0" />
-        <import addon="script.module.axel.downloader" version="0.2.1" />
-        <!--import addon="script.module.pyxbmct" version="1.1.2" /-->
-        <import addon="script.common.plugin.cache" />
-    </requires>
-    <extension point="xbmc.python.pluginsource"
-               library="default.py">
-        <provides>video</provides>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <platform>all</platform>
-        <summary>Stream and download scene releases from the links listed on Icefilms.info</summary>
-        <description>Visit www.tvaddons.ag for support.
-
-Turns your XBMC into an instant free on-demand media-center. Stream and download to your library DVD and HD720p quality videos. Browse and search the library of over 77,000 videos with metadata and posters. Never experience the frustration of dead video links!</description>
-    </extension>
-</addon>
-
-<addon id="script.module.axel.downloader"
-	     name="Axel Downloader"
-	     version="0.2.2"
-	     provider-name="Eldorado">
-  <requires>
-    <import addon="xbmc.python" version="2.1.0" />
-    <import addon="script.module.addon.common" version="2.0.0" />
-  </requires>
-  <extension point="xbmc.python.script" library="controlpanel.py"/>
-  <extension point="xbmc.python.module" library="lib" />
-  <extension library="default.py" point="xbmc.service" start="startup" />
-  <extension point="xbmc.addon.metadata">
-    <platform>all</platform>
-    <summary lang="en">Multi-connection/threaded Downloader</summary>
-    <description lang="en">Download a file using multiple connections to achieve the highest speed.</description>
   </extension>
 </addon>
 
