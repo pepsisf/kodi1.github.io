@@ -85,7 +85,7 @@ def import_addons (list):
       download_addon(l)
 
 def download_addon(l):
-  print 'Get: %s' % l
+  print 'Get url: %s' % l
   try:
     r = requests.get(l, timeout=30, headers={'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0'})
     rh = r.headers.get('content-disposition')
