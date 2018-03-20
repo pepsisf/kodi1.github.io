@@ -34,8 +34,8 @@ tmp_path = tempfile.mkdtemp(prefix='%s_tmp_' % os.path.splitext(os.path.basename
 print "Using temp path %s" % tmp_path
 cwd = os.getcwd()
 files = ['changelog.txt', 'icon.*', 'addon.xml', 'fanart.*']
-addons_url_list = json.load(open('addons.json'))
-print "Loaded list of %s addon urls" % len(addons_url_list)
+addons_urls_list = json.load(open('addons.json'))
+print "Loaded list of %s addon urls" % len(addons_urls_list)
 
 def mk_repo_trget_name(name):
   return re.sub( r"(-\w+\.zip|-[\d.]*\.zip|\.zip)", "", os.path.basename(os.path.basename(name)))
@@ -78,16 +78,52 @@ def transfer_it(dest, src):
 
   print "Get ", os.listdir(dest)
 
-def import_addons (list):
-  for l in list:
-    if not download_addon(l):
-      print 'Request failed! Second try...'
-      download_addon(l)
-
-def download_addon(l):
-  print 'Get url: %s' % l
+def get_remote_addon_version(repo_id, addon_id):
   try:
-    r = requests.get(l, timeout=30, headers={'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0'})
+    url = "https://raw.githubusercontent.com/%s/%s/master/addon.xml" % (repo_id, addon_id)
+    res = requests.get(url)
+    xml = etree.fromstring( res.content )
+    version = xml.get('version')
+    return version
+
+  except:
+    return None
+
+def get_local_addon_version(addon_id):
+  try:
+    path = os.path.join(addon_id, 'addon.xml')
+    xml = etree.parse( path )
+    version = xml.getroot().get('version')
+    return version
+
+  except:
+    return None
+
+def is_addon_updated(url):
+  try:
+    # Check only github based addons
+    matches = re.compile("github\.com/(.*?)/(.+?)/archive").findall(url)
+
+    repo_id = matches[0][0]
+    addon_id = matches[0][1]
+
+    local_addon_version = get_local_addon_version(addon_id)
+    remote_addon_version = get_remote_addon_version(repo_id, addon_id)
+
+    if local_addon_version != remote_addon_version:
+      print "Addon %s has been updated. New version is %s" % (addon_id, remote_addon_version)
+      return True
+    print "Addon %s has not been updated and will not be downloaded. Version is %s" % (addon_id, local_addon_version)
+    return False
+
+  except:
+    print "Not able to verify if addon was updated. Downloading it anyway."
+    return True
+
+def download_addon(url):
+  print 'Get url: %s' % url
+  try:
+    r = requests.get(url, timeout=30, headers={'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0'})
     rh = r.headers.get('content-disposition')
     if r.status_code == 200:
       if rh:
@@ -101,9 +137,21 @@ def download_addon(l):
   except:
     return False
 
+def download_addons(urls):
+  # Iterate the addons list and download only addons with newer version
+  for url in urls:
+    # Check if addon is new version
+    if is_addon_updated(url):
+      # if first download fails retry once
+      if not download_addon(url):
+        print 'Download failed! Retrying...'
+        download_addon(url)
+    print "*********************************"
+
+
 if ( __name__ == "__main__" ):
   # start
-  import_addons(addons_url_list)
+  download_addons(addons_urls_list)
 
   for a in glob.iglob(os.path.join(tmp_path, '*.zip')):
     name = mk_repo_trget_name(a)
