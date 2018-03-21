@@ -14,6 +14,7 @@ import urllib2
 import zipfile
 import tempfile
 import requests
+import traceback
 import addons_xml_generator as gen
 from lxml import etree
 
@@ -121,7 +122,7 @@ def is_addon_updated(url):
     return True
 
 def download_addon(url):
-  print 'Get url: %s' % url
+  #print 'Get url: %s' % url
   try:
     r = requests.get(url, timeout=30, headers={'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:36.0) Gecko/20100101 Firefox/36.0'})
     rh = r.headers.get('content-disposition')
@@ -129,12 +130,13 @@ def download_addon(url):
       if rh:
         f_name = os.path.join(tmp_path, rh.split('filename=')[1])
       else:
-        f_name = os.path.join(tmp_path, l.split('/')[-1])
+        f_name = os.path.join(tmp_path, url.split('/')[-1])
       print "Download: ", f_name
       with open(f_name, "wb") as code:
         code.write(r.content)
     return True
   except:
+    print traceback.format_exc(sys.exc_info())
     return False
 
 def download_addons(urls):
