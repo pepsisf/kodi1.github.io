@@ -189,7 +189,7 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.dramafever" name="DRAMAFEVER" version="0.5.2" provider-name="Majide">
+<addon id="plugin.video.dramafever" name="DRAMAFEVER" version="0.5.3" provider-name="Majide">
   <requires>
   	<import addon="xbmc.python" version="2.1.0"/>
   </requires>
@@ -202,9 +202,10 @@
   	<disclaimer lang="en">This is not an official addon! If the official APP is available for your platform, use it instead of this addon. All rights on content are reserved by Warner Bros.</disclaimer>
   	<language>en</language>
   	<platform>all</platform>
+    <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
   	<forum>https://kodibg.org/forum/thread-79.html</forum>
   	<website>https://www.dramafever.com</website>
-  	<news>Fixed: Video quality; The addon remains dependent on script.video.F4mProxy-2.8.7 despite the availability of a new one.</news>
+  	<news>Fixed: Video opening; Fixed: Video seeking for the most titles; The addon remains dependent on script.video.F4mProxy-2.8.7 for one more version! Stay tuned.</news>
   	<assets>
 	   <icon>resources/icon.png</icon>
        <fanart>resources/fanart.jpg</fanart>
