@@ -288,7 +288,7 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.filmi2k" name="Filmi2k.com" version="1.0.3" provider-name="Johnie">
+<addon id="plugin.video.filmi2k" name="Filmi2k.com" version="1.0.4" provider-name="Johnie">
  <requires>
      <import addon="xbmc.python" version="2.1.0"/>
      <import addon="script.module.urlresolver" version="2.10.0"/>
@@ -548,32 +548,6 @@
   	<website>https://kodibg.org/</website>
   	<email>harrygg@gmail.com</email>
   </extension>
-</addon>
-
-<addon id="plugin.video.flixtor" name="FLIXTOR" version="1.0.0" provider-name="Johnie">
- <requires>
-     <import addon="xbmc.python" version="2.1.0"/>
- </requires>
- <extension point="xbmc.python.pluginsource" library="default.py">
-     <provides>video</provides>
- </extension>
- <extension point="xbmc.addon.metadata">
-     <summary lang="bg">Приставка за съдържание при поискване от https://flixtor.to/</summary>
-     <summary lang="en">Addon for VOD from https://flixtor.to/</summary>
-    <description lang="bg">Приставка за съдържание при поискване от https://flixtor.to/. Препоръчително е използването на широколентова интернет връзка!</description>
-     <description lang="en">Addon for watching on demand videos from https://flixtor.to/. Broadband internet connection is recomended!</description>
-     <disclaimer lang="bg">Някои елементи на тази приставка, може да не са легални в държавата ви - проверете и инсталирайте на ваша отговорност.</disclaimer>
-     <disclaimer lang="en">Some parts of this addon may not be legal in your country of residence - please check with your local laws before installing.</disclaimer>
-     <language>en</language>
-     <platform>all</platform>
-     <forum></forum>
-     <website></website>
-     <email></email>
-	 <assets>
-	   <icon>resources/icon.png</icon>
-       <fanart>resources/fanart.jpg</fanart>
-	</assets>
- </extension>
 </addon>
 
 <addon id="plugin.video.gospodari" name="Господари на ефира" version="1.1.2" provider-name="HarryGG">
