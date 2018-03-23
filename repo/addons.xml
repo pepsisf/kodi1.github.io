@@ -607,7 +607,7 @@
 
 <addon id="plugin.video.energytorrent"
        name="[COLOR red]ENERGY-TORRENT[/COLOR]"
-       version="1.0.0"
+       version="1.0.1"
        provider-name="Johnie">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
